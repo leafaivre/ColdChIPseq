@@ -38,11 +38,7 @@ diffRep <- lapply(diffRep, function(x){
     filter(!(Chrom %in% c("Pt", "Mt"))) %>%
     filter(padj < 0.001) %>%
     filter(abs(log2FC) > 0.5) %>%
-<<<<<<< HEAD
     select(Chrom, Start, End, Event, log2FC, padj)
-=======
-    select(Chrom, Start, End, Length, Event, log2FC, padj)
->>>>>>> 9844bf5ad70849fa555bd91841a7a768896f820e
 })
 
 ## Converting a GRange
