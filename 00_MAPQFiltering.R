@@ -62,3 +62,5 @@ ggvenn(Venny)
 
 # Looking for the lost genes ----------------------------------------------
 Lost <- anti_join(GeneUnFilt, GeneFilt, by = "Gene")
+
+xlsx::write.xlsx(Lost, "Data/MAPQLostGenes.xlsx")

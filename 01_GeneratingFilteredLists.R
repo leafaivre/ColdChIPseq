@@ -12,7 +12,7 @@ library(GenomicRanges)
 library(rtracklayer)
 library(TxDb.Athaliana.BioMart.plantsmart28)
 library(readxl)
-
+library(plyranges)
 
 # Data import -------------------------------------------------------------
 diffRep <- list(K4_3h = read.delim("InputFiles/diff.K24.3h.50.midfrag.bed"),
@@ -37,7 +37,12 @@ diffRep <- lapply(diffRep, function(x){
   x %>%
     filter(!(Chrom %in% c("Pt", "Mt"))) %>%
     filter(padj < 0.001) %>%
-    filter(abs(log2FC) > 0.5)
+    filter(abs(log2FC) > 0.5) %>%
+<<<<<<< HEAD
+    select(Chrom, Start, End, Event, log2FC, padj)
+=======
+    select(Chrom, Start, End, Length, Event, log2FC, padj)
+>>>>>>> 9844bf5ad70849fa555bd91841a7a768896f820e
 })
 
 ## Converting a GRange
@@ -46,39 +51,39 @@ GR <- lapply(diffRep, function(x){
   makeGRangesFromDataFrame(x, keep.extra.columns = TRUE)
 })
 
-## Filtering on the background: the DM should overlap a peak 
+## Filtering on the background: the DM should belong to a peak 
 InPeak <- list(
-  K4_3h = GR$K4_3h[overlapsAny(GR$K4_3h, Peaks_K4_3h, minoverlap = 1)],
-  K4_3d = GR$K4_3d[overlapsAny(GR$K4_3d, Peaks_K4_3d, minoverlap = 1)],
-  K27_3h = GR$K27_3h[overlapsAny(GR$K27_3h, Peaks_K27_3h, minoverlap = 1)],
-  K27_3d = GR$K27_3d[overlapsAny(GR$K27_3d, Peaks_K27_3d, minoverlap = 1)])
+  K4_3h = GR$K4_3h[overlapsAny(GR$K4_3h, Peaks_K4_3h, minoverlap = 50)],
+  K4_3d = GR$K4_3d[overlapsAny(GR$K4_3d, Peaks_K4_3d, minoverlap = 50)],
+  K27_3h = GR$K27_3h[overlapsAny(GR$K27_3h, Peaks_K27_3h, minoverlap = 200)],
+  K27_3d = GR$K27_3d[overlapsAny(GR$K27_3d, Peaks_K27_3d, minoverlap = 200)])
 
 ## Dividing on UP/DOWN
 
 UDRegions <- list(
   K4hU = InPeak$K4_3h %>%
-)
-plyranges::filter
-
-
-UDRegions <- list(
-  K43hU = diffRep$K4_3h %>%
-    filter(Event == "Up"),
-  K43hD = diffRep$K4_3h %>%
-    filter(Event == "Down"),
-  K43dU = diffRep$K4_3d %>%
-    filter(Event == "Up"),
-  K43dD = diffRep$K4_3d %>%
-    filter(Event == "Down"),
-  K273hU = diffRep$K27_3h %>%
-    filter(Event == "Up"),
-  K273hD = diffRep$K27_3h %>%
-    filter(Event == "Down"),
-  K273dU = diffRep$K27_3d %>%
-    filter(Event == "Up"),
-  K273dD = diffRep$K27_3d %>%
-    filter(Event == "Down"))
+    plyranges::filter(Event == "Up"),
+  K4hD = InPeak$K4_3h %>%
+    plyranges::filter(Event == "Down"),
+  K4dU = InPeak$K4_3d %>%
+    plyranges::filter(Event == "Up"),
+  K4dD = InPeak$K4_3d %>%
+    plyranges::filter(Event == "Down"),
+  K27hU = InPeak$K27_3h %>%
+    plyranges::filter(Event == "Up"),
+  K27hD = InPeak$K27_3h %>%
+    plyranges::filter(Event == "Down"),
+  K27dU = InPeak$K27_3d %>%
+    plyranges::filter(Event == "Up"),
+  K27dD = InPeak$K27_3d %>%
+    plyranges::filter(Event == "Down"))
 
 
 
+# Creating bed tracks -----------------------------------------------------
 
+lapply(names(UDRegions), function(x){
+  write.table(UDRegions[[x]], 
+              file = paste("Data/", x, ".bed", sep = ""), 
+              quote = F, sep = "\t", row.names = F, col.names = F) 
+})
