@@ -16,7 +16,7 @@ library(ggvenn)
 
 Araport <- TxDb.Athaliana.BioMart.plantsmart28 
 
-Genes <- genes(Araport,columns=c("GENEID","TXTYPE"))
+Genes <- genes(Araport, columns = c("GENEID","TXTYPE"))
 
 TAIR10genes <- read_excel("InputFiles/TAIR10genes.xlsx", 
                           sheet = "Name", col_types = c("text", "text"))
