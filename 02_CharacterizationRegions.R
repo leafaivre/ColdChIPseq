@@ -1,4 +1,5 @@
 #This code characterizes the significant diffReps regions
+#Uses the tracks generated in 01_GeneratingFilteredLists
 #Author: Lea Faivre
 #Date: 231011
 
@@ -130,11 +131,13 @@ ggplot(DMR_K27_FC, aes(x = Sample, y = log2FC)) +
 
 # Annotation --------------------------------------------------------------
 AnnoK4 <- lapply(DMR_K4, annotatePeak, TxDb = Araport, level = "gene",
-               genomicAnnotationPriority = c("5UTR", "3UTR", "Exon", "Intron", 
-                                             "Promoter", "Downstream", "Intergenic"),
+                 genomicAnnotationPriority = c("5UTR", "3UTR", "Exon", "Intron", 
+                                               "Promoter", "Downstream", "Intergenic"),
                tssRegion = c(-500, 500), verbose = FALSE)
 
 plotAnnoBar(AnnoK4)
+#ggsave("Plots/K4DMRAnno.tiff", units = "in", width = 8, height = 4, dpi = 300, 
+       #compression = 'lzw')
 plotDistToTSS(AnnoK4)
 
 AnnoK27 <- lapply(DMR_K27, annotatePeak, TxDb = Araport, level = "gene",
@@ -143,8 +146,6 @@ AnnoK27 <- lapply(DMR_K27, annotatePeak, TxDb = Araport, level = "gene",
                  tssRegion = c(-500, 500), verbose = FALSE)
 
 plotAnnoBar(AnnoK27)
+#ggsave("Plots/K27DMRAnno.tiff", units = "in", width = 8, height = 4, dpi = 300, 
+       #compression = 'lzw')
 plotDistToTSS(AnnoK27)
-
-##Fix the colors 
-
-
