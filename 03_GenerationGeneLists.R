@@ -20,21 +20,21 @@ Araport <- TxDb.Athaliana.BioMart.plantsmart28
 extraCols_FC <- c(Length = "numeric", Strand = "character", Event = "character", log2FC = "numeric", padj = "numeric")
 
 DMR <- list(
-  "K4_3h_Gain" = rtracklayer::import("Data/K4hU.bed", format = "BED", 
+  "K4_3h_Gain" = rtracklayer::import("Data/Test/K4hU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "K4_3h_Loss" = rtracklayer::import("Data/K4hD.bed", format = "BED", 
+  "K4_3h_Loss" = rtracklayer::import("Data/Test/K4hD.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "K4_3d_Gain" = rtracklayer::import("Data/K4dU.bed", format = "BED",
+  "K4_3d_Gain" = rtracklayer::import("Data/Test/K4dU.bed", format = "BED",
                                   extraCols = extraCols_FC),
-  "K4_3d_Loss" = rtracklayer::import("Data/K4dD.bed", format = "BED", 
+  "K4_3d_Loss" = rtracklayer::import("Data/Test/K4dD.bed", format = "BED", 
                                   extraCols = extraCols_FC),
- "K27_3h_Gain" = rtracklayer::import("Data/K27hU.bed", format = "BED", 
+ "K27_3h_Gain" = rtracklayer::import("Data/Test/K27hU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "K27_3h_Loss" = rtracklayer::import("Data/K27hD.bed", format = "BED", 
+  "K27_3h_Loss" = rtracklayer::import("Data/Test/K27hD.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "K27_3d_Gain" = rtracklayer::import("Data/K27dU.bed", format = "BED", 
+  "K27_3d_Gain" = rtracklayer::import("Data/Test/K27dU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "K27_3d_Loss" = rtracklayer::import("Data/K27dD.bed", format = "BED", 
+  "K27_3d_Loss" = rtracklayer::import("Data/Test/K27dD.bed", format = "BED", 
                                   extraCols = extraCols_FC))
 
 TAIR10genes <- read_excel("InputFiles/TAIR10genes.xlsx", 
@@ -88,7 +88,7 @@ sapply(DMGenes, nrow)
 for (i in names(AnnoDFCorr)) {
   if (nrow(AnnoDFCorr[[i]]) > 0) {
     write.xlsx(x = AnnoDFCorr[[i]],
-               file = "Data/DMGenes_Full.xlsx",
+               file = "Data/Test/DMGenes_Full.xlsx",
                sheetName = paste(i, sep = ""),
                row.names = FALSE,
                append = T)

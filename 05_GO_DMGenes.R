@@ -18,7 +18,7 @@ library(topGO)
 library(org.At.tair.db)
 
 # Data import -------------------------------------------------------------
-DMGenes <- import_list("Data/DMGenes_Full.xlsx", setclass = "tbl")
+DMGenes <- import_list("Data/Test/DMGenes_Full.xlsx", setclass = "tbl")
 
 UniqueDM <- lapply(DMGenes, function(x){
   y <- x %>%
@@ -60,7 +60,7 @@ GOTable <- lapply(GOTest, function(x){
            topNodes = length(Res@score), numChar = 60)
 })
 
-FormattedTable <- lapply(GOTable, function(x){
+SigGO <- lapply(GOTable, function(x){
   x %>% 
     mutate(raw.p.value = as.numeric(raw.p.value),
            logPvalue = log10(1/raw.p.value),
@@ -70,17 +70,14 @@ FormattedTable <- lapply(GOTable, function(x){
 
 
 for (i in names(SigGO)) {
-  write.xlsx(x = as.data.frame(SigGO[[i]]),
-             file = "Results/GO_DMGenes_woUPDOWN_0.01.xlsx",
-             sheetName = paste(i, sep = ""),
-             row.names = FALSE,
-             append = T)
-}
+  write.xlsx(x = as.data.frame(SigGO[[i]]), 
+             file = "Results/New_GO_DMGenes.xlsx", sheetName = paste(i, sep = ""),
+             row.names = FALSE, append = T)}
 
 
 # Extracting Genes related to a Term --------------------------------------
 
-GO <- lapply(GOTest, genesInTerm)
+allGO <- lapply(GOTest, genesInTerm)
 
 TAIR10genes <- read_excel("InputFiles/TAIR10genes.xlsx", 
                           sheet = "Name", col_types = c("text", "text"))
@@ -93,4 +90,37 @@ ColdRelated <- lapply(DiffGenes, function(x) {
 })
 
 
+# Plotting ----------------------------------------------------------------
+Top20 <- lapply(SigGO, function(x){
+  x %>%
+    filter(Significant >= 2) %>%
+    filter(FoldEnrichment >= 1.5) %>%
+    slice_max(logPvalue, n = 20, with_ties = FALSE) %>%
+    mutate(GOTerm = paste(Term, "(", GO.ID, ")"))
+})
 
+ggplot(Top20$K4hU, aes(x = reorder(GOTerm, logPvalue), y = logPvalue, 
+                           fill = reorder(GOTerm, -logPvalue))) +
+  geom_col() +
+  coord_flip() +
+  scale_fill_manual(values = c("#92C5DE", "#92C5DE", "#2166AC", "dimgray", "#92C5DE", 
+                               "dimgray", "coral3", "#2166AC","#92C5DE", "dimgray",
+                               "dimgray", "coral3",  "dimgray", "coral3", "#92C5DE",
+                              "dimgray", "dimgray","dimgray", "#92C5DE", "#92C5DE")) +
+  labs(x = "", y = "log10(1/P-value)", title = "Genes gaining H3K4me3 after 3h") +
+  theme(axis.text = element_text(colour = "black"),
+        legend.position = "none")
+#ggsave("Plots/GO_3h_K4_Gain.tiff", units = "in", width = 8, height = 4, dpi = 300, compression = 'lzw')
+
+ggplot(Top20$K4hD, aes(x = reorder(GOTerm, logPvalue), y = logPvalue, 
+                       fill = reorder(GOTerm, -logPvalue))) +
+  geom_col() +
+  coord_flip() +
+  scale_fill_manual(values = c("dimgray", "darkseagreen", "dimgray", "coral3", "darkseagreen", 
+                               "goldenrod2", "#92C5DE", "#2166AC","goldenrod2", "dimgray",
+                               "dimgray", "coral3",  "dimgray", "dimgray", "#92C5DE",
+                               "goldenrod3", "coral3","goldenrod3", "goldenrod3", "dimgray")) +
+  labs(x = "", y = "log10(1/P-value)", title = "Genes losing H3K4me3 after 3h") +
+  theme(axis.text = element_text(colour = "black"),
+        legend.position = "none")
+#ggsave("Plots/GO_3h_K4_Loss.tiff", units = "in", width = 8, height = 4, dpi = 300, compression = 'lzw')

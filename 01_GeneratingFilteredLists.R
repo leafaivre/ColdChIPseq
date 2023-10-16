@@ -15,8 +15,8 @@ library(readxl)
 library(plyranges)
 
 # Data import -------------------------------------------------------------
-diffRep <- list(K4_3h = read.delim("InputFiles/diff.K24.3h.50.midfrag.bed"),
-                K4_3d = read.delim("InputFiles/diff.K24.3d.50.midfrag.bed"),
+diffRep <- list(K4_3h = read.delim("InputFiles/diff.K24.3h.200.midfrag.bed"),
+                K4_3d = read.delim("InputFiles/diff.K24.3d.200.midfrag.bed"),
                 K27_3h = read.delim("InputFiles/diff.K27.3h.200.midfrag.bed"),
                 K27_3d = read.delim("InputFiles/diff.K27.3d.200.midfrag.bed"))
 
@@ -80,6 +80,6 @@ UDRegions <- list(
 
 lapply(names(UDRegions), function(x){
   write.table(UDRegions[[x]], 
-              file = paste("Data/", x, ".bed", sep = ""), 
+              file = paste("Data/Test/", x, ".bed", sep = ""), 
               quote = F, sep = "\t", row.names = F, col.names = F) 
 })

@@ -25,22 +25,22 @@ Araport <- TxDb.Athaliana.BioMart.plantsmart28
 extraCols_FC <- c(Length = "numeric", Strand = "character", Event = "character", log2FC = "numeric", padj = "numeric")
 
 DMR_K4 <- list(
-  "3h Gain" = rtracklayer::import("Data/K4hU.bed", format = "BED", 
+  "3h Gain" = rtracklayer::import("Data/Test/K4hU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "3h Loss" = rtracklayer::import("Data/K4hD.bed", format = "BED", 
+  "3h Loss" = rtracklayer::import("Data/Test/K4hD.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "3d Gain" = rtracklayer::import("Data/K4dU.bed", format = "BED",
+  "3d Gain" = rtracklayer::import("Data/Test/K4dU.bed", format = "BED",
                                   extraCols = extraCols_FC),
-  "3d Loss" = rtracklayer::import("Data/K4dD.bed", format = "BED", 
+  "3d Loss" = rtracklayer::import("Data/Test/K4dD.bed", format = "BED", 
                                   extraCols = extraCols_FC))
 DMR_K27 <- list(
-  "3h Gain" = rtracklayer::import("Data/K27hU.bed", format = "BED", 
+  "3h Gain" = rtracklayer::import("Data/Test/K27hU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "3h Loss" = rtracklayer::import("Data/K27hD.bed", format = "BED", 
+  "3h Loss" = rtracklayer::import("Data/Test/K27hD.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "3d Gain" = rtracklayer::import("Data/K27dU.bed", format = "BED", 
+  "3d Gain" = rtracklayer::import("Data/Test/K27dU.bed", format = "BED", 
                                   extraCols = extraCols_FC),
-  "3d Loss" = rtracklayer::import("Data/K27dD.bed", format = "BED", 
+  "3d Loss" = rtracklayer::import("Data/Test/K27dD.bed", format = "BED", 
                                   extraCols = extraCols_FC))
 
 # Plotting the length -----------------------------------------------------
@@ -56,7 +56,7 @@ ggplot(DMR_K4_length, aes(x = Sample, y = Length)) +
               alpha = 0.7, linetype = "blank") +
   geom_boxplot(aes(x = Sample, y = Length), width = 0.1, fill = "white", 
                outlier.shape = NA) +
-  ylim(50, 300) +
+  ylim(200, 1000) +
   scale_fill_manual(values = c("#749140","#cd6155","#196F3D","#5f0000")) +
   labs(y = "Length (bp)", x = "") +
   theme(axis.text = element_text(colour = "black"),

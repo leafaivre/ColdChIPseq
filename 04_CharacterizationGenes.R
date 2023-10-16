@@ -18,7 +18,7 @@ library(topGO)
 library(org.At.tair.db)
 
 # Data import -------------------------------------------------------------
-DMGenes <- import_list("Data/DMGenes_Full.xlsx", setclass = "tbl")
+DMGenes <- import_list("Data/Test/DMGenes_Full.xlsx", setclass = "tbl")
 
 UniqueDM <- lapply(DMGenes, function(x){
   y <- x %>%
