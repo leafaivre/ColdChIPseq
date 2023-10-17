@@ -1,0 +1,7 @@
+sample	Condition	Rep
+N_1	N	1
+h_1	3h	1
+d_1	3d	1
+N_2	N	2
+h_2	3h	2
+d_2	3d	2

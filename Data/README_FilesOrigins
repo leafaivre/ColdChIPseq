@@ -1,0 +1,32 @@
+This file lists the origin of the files present in the Data folder
+
+DMGenes_FC.xlsx -> 06_featureCountsGeneLists.R
+DMGenes_Full.xlsx -> 03_GenerationGeneLists.R
+
+FC_featureCount_K4.xlsx -> 06_featureCountsGeneLists.R
+FC_featureCount_K27.xlsx -> 06_featureCountsGeneLists.R
+
+K4.N.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+K4.N.3h.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+K4.N.3h.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+
+K4dD.bed -> 01_GeneratingFilteredLists.R
+K4dU.bed -> 01_GeneratingFilteredLists.R
+K4hD.bed -> 01_GeneratingFilteredLists.R
+K4hU.bed -> 01_GeneratingFilteredLists.R
+
+K4genes_AnyCond_CDS.xlsx -> 06a_GeneratingGenesInPeaksMasterList.R
+
+K27.N.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+K27.N.3h.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+K27.N.3h.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
+
+K27dD.bed -> 01_GeneratingFilteredLists.R
+K27dU.bed -> 01_GeneratingFilteredLists.R
+K27hD.bed -> 01_GeneratingFilteredLists.R
+K27hU.bed -> 01_GeneratingFilteredLists.R
+
+K27genes_AnyCond_CDS.xlsx -> 06a_GeneratingGenesInPeaksMasterList.R
+
+MAPQLostGenes.xlsx -> 00_MAPQFiltering.R
+
