@@ -4,11 +4,11 @@ K4DMRAnno.tiff -> 02_CharacterizationRegions.R
 K4DMRFC.tiff -> 02_CharacterizationRegions.R
 K4DMRLength.tiff -> 02_CharacterizationRegions.R
 
-K4K27_3d.tiff -> 04_CharacterizationGenes.R
-K4K27_3h.tiff -> 04_CharacterizationGenes.R
+K4K27_3d.tiff -> 07_CharacterizationGenesFC.R
+K4K27_3h.tiff -> 07_CharacterizationGenesFC.R
 
 K27DMRAnno.tiff -> 02_CharacterizationRegions.R
 K27DMRFC.tiff -> 02_CharacterizationRegions.R
 K27DMRLength.tiff -> 02_CharacterizationRegions.R
 
-PersistenceDMG -> 04_CharacterizationGenes.R
+PersistenceDMG -> 07_CharacterizationGenesFC.R
