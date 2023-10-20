@@ -99,6 +99,8 @@ InPeaks <- list(
   K4 = inner_join(NormCountsAvg$K4, K4Genes, by = "Gene"),
   K27 = inner_join(NormCountsAvg$K27, K27Genes, by = "Gene"))
 
+
+
 ## Keeping only the significant
 InPeaksFC <- list(
   K4_3h_Gain = InPeaks$K4 %>%
@@ -144,3 +146,11 @@ for (i in names(InPeaksFC)) {
                append = T)
   }
 
+
+for (i in names(InPeaks)) {
+  write.xlsx(x = as.data.frame(InPeaks[[i]]),
+             file = "Data/FoldChanges_allGenes.xlsx",
+             sheetName = paste(i, sep = ""),
+             row.names = FALSE,
+             append = T)
+}

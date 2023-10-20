@@ -1,8 +1,14 @@
 This file lists the origin of the files present in the Plots folder
 
+K4_Nvs3d.tiff -> 09_CorrelationK4K27Plots.R
+K4_Nvs3h.tiff -> 09_CorrelationK4K27Plots.R
+
 K4DMRAnno.tiff -> 02_CharacterizationRegions.R
 K4DMRFC.tiff -> 02_CharacterizationRegions.R
 K4DMRLength.tiff -> 02_CharacterizationRegions.R
+
+K27_Nvs3d.tiff -> 09_CorrelationK4K27Plots.R
+K27_Nvs3h.tiff -> 09_CorrelationK4K27Plots.R
 
 K4K27_3d.tiff -> 07_CharacterizationGenesFC.R
 K4K27_3h.tiff -> 07_CharacterizationGenesFC.R

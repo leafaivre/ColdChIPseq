@@ -6,6 +6,8 @@ DMGenes_Full.xlsx -> 03_GenerationGeneLists.R
 FC_featureCount_K4.xlsx -> 06_featureCountsGeneLists.R
 FC_featureCount_K27.xlsx -> 06_featureCountsGeneLists.R
 
+FoldChanges_allGenes.xlsx -> 06_featureCountsGeneLists.R
+
 K4.N.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
 K4.N.3h.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
 K4.N.3h.3d.peaks.bed -> 01a_GeneratingMasterPeaksLists.R
