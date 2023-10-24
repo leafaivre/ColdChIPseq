@@ -17,4 +17,6 @@ K27DMRAnno.tiff -> 02_CharacterizationRegions.R
 K27DMRFC.tiff -> 02_CharacterizationRegions.R
 K27DMRLength.tiff -> 02_CharacterizationRegions.R
 
+PCA_RNAseq.tiff -> 10_RNAseqAnalysis.R
+
 PersistenceDMG -> 07_CharacterizationGenesFC.R
