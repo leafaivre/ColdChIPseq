@@ -1,5 +1,11 @@
 This file lists the origin of the files present in the Plots folder
 
+All plots in Correlations folder -> 11_DMDE_Overlaps_Correlations.R
+
+All plots in GO folder -> 08_GO_DMGenesFC.R
+
+DEDM_Overlaps -> 11_DMDE_Overlaps_Correlations.R
+
 K4_Nvs3d.tiff -> 09_CorrelationK4K27Plots.R
 K4_Nvs3h.tiff -> 09_CorrelationK4K27Plots.R
 

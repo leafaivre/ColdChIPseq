@@ -13,6 +13,8 @@ library(readxl)
 library(xlsx)
 
 # Data import ---------------------------------------------------------------------------------
+TAIR10genes <- read_excel("InputFiles/TAIR10genes.xlsx", 
+                          sheet = "Name", col_types = c("text", "text"))
 
 data <- read.table("InputFiles/withTE.txt", header = T, row.names = 1)
 
@@ -90,7 +92,8 @@ Res_all <- lapply(Results, function(x){
 
 Sig_Res <- lapply(Res_all, function(x){
   x %>% 
-    filter(padj < 0.05 & abs(log2FoldChange) >= 1)
+    filter(padj < 0.05 & abs(log2FoldChange) >= 1) %>%
+    left_join(TAIR10genes, by = "Gene")
 })
 
 
