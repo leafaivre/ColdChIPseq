@@ -111,4 +111,4 @@ NonDEK27 <- K27.bed[!(K27.bed$name %in% DE$h_UP$Gene) &
                     !(K27.bed$name %in% DE$d_UP$Gene) &
                     !(K27.bed$name %in% DE$d_DOWN$Gene)]
 
-#export.bed(NonDEK4, con = "Results/bedFiles/NonDE_K4.bed")
+#export.bed(NonDEK27, con = "Results/bedFiles/NonDE_K27.bed")
