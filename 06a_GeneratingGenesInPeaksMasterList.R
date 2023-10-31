@@ -18,6 +18,8 @@ Peaks_K4 <- rtracklayer::import("Data/K4.N.3h.3d.peaks.bed", format = "BED")
 
 Peaks_K27 <- rtracklayer::import("Data/K27.N.3h.3d.peaks.bed", format = "BED")
 
+NPeaks_K27 <- read.delim("InputFiles/A4A16-idr", header = FALSE)
+
 Araport <- TxDb.Athaliana.BioMart.plantsmart28
 
 Genes <- genes(Araport, columns = c("GENEID", "TXTYPE"))
@@ -43,3 +45,23 @@ K4.genes <- as.data.frame(unlist(K4genes$GENEID))
 colnames(K4.genes) <- ("Gene")
 
 xlsx::write.xlsx(K4.genes, "Data/K4genes_AnyCond_CDS.xlsx", row.names = FALSE)
+
+
+# K27 Genes in N ------------------------------------------------------------------------------
+colnames(NPeaks_K27) <- c("Chr", "Start", "End", "Name", "IDR", "Strand", "Signal", 
+                 "pvalue", "qvalue", "localIDR", "globalIDR", 
+                 "R1Start", "R1End", "R1pvalue",
+                 "R2Start", "R2End", "R2pvalue")
+
+NPeaks_K27GR <- makeGRangesFromDataFrame(NPeaks_K27, keep.extra.columns = TRUE, 
+                         start.field = "Start", end.field = "End")
+
+
+
+NK27genes <- subsetByOverlaps(Genes, NPeaks_K27GR, minoverlap = 150, ignore.strand = TRUE)
+
+NK27.genes <- as.data.frame(unlist(NK27genes$GENEID))
+
+colnames(NK27.genes) <- ("Gene")
+
+xlsx::write.xlsx(NK27.genes, "Data/K27genes_N_CDS.xlsx", row.names = FALSE)

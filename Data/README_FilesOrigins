@@ -32,8 +32,13 @@ K27hU.bed -> 01_GeneratingFilteredLists.R
 
 K27genes_AnyCond_CDS.xlsx -> 06a_GeneratingGenesInPeaksMasterList.R
 
+K27genes_N_CDS.xlsx -> 06a_GeneratingGenesInPeaksMasterList.R
+
 MAPQLostGenes.xlsx -> 00_MAPQFiltering.R
+
+Persistence_pie.xlsx -> By hand based on the Persistence Venn diagrams
 
 RNAseq_Nvs3h.xlsx -> 10_RNAseqAnalysis.R
 RNAseq_Nvs3d.xlsx -> 10_RNAseqAnalysis.R
 
+RPKM_RNAseq.xlsx -> 10b_RNAseq_RPKM.R

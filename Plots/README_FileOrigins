@@ -2,7 +2,7 @@ This file lists the origin of the files present in the Plots folder
 
 All plots in Correlations folder -> 11_DMDE_Overlaps_Correlations.R
 
-All plots in GO folder -> 08_GO_DMGenesFC.R
+All plots in GO folder -> 08_GO_DMGenesFC.R or 08b_GO_DEGenes.R
 
 DEDM_Overlaps -> 11_DMDE_Overlaps_Correlations.R
 
@@ -13,16 +13,25 @@ K4DMRAnno.tiff -> 02_CharacterizationRegions.R
 K4DMRFC.tiff -> 02_CharacterizationRegions.R
 K4DMRLength.tiff -> 02_CharacterizationRegions.R
 
-K27_Nvs3d.tiff -> 09_CorrelationK4K27Plots.R
-K27_Nvs3h.tiff -> 09_CorrelationK4K27Plots.R
-
 K4K27_3d.tiff -> 07_CharacterizationGenesFC.R
 K4K27_3h.tiff -> 07_CharacterizationGenesFC.R
+
+
+K27_DE_LogFC -> 13_K27Targets_DE.R
+K27_DE_Pie -> 13_K27Targets_DE.R
+K27_DE_RPKM -> 13_K27Targets_DE.R
+
+K27_Nvs3d.tiff -> 09_CorrelationK4K27Plots.R
+K27_Nvs3h.tiff -> 09_CorrelationK4K27Plots.R
 
 K27DMRAnno.tiff -> 02_CharacterizationRegions.R
 K27DMRFC.tiff -> 02_CharacterizationRegions.R
 K27DMRLength.tiff -> 02_CharacterizationRegions.R
 
+K27Targets_UpGenes -> 13_K27Targets_DE.R
+
 PCA_RNAseq.tiff -> 10_RNAseqAnalysis.R
 
 PersistenceDMG -> 07_CharacterizationGenesFC.R
+
+PersistencePie -> 07_CharacterizationGenesFC.R
