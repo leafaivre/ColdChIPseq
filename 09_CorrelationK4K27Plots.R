@@ -24,6 +24,8 @@ library(plyr)
 
 Data <- import_list("Data/FoldChanges_allGenes.xlsx", setclass = "tbl")
 
+Annotation <- read_excel("Data/Annotation_CORplots.xlsx")
+
 Data <- lapply(Data, function(x){
   x %>%
     mutate(Col_H = case_when(log2FCNvs3h < -0.5 ~ "loss",
@@ -95,6 +97,30 @@ ggplot(Data$K27, aes(x = N, y = d, color = Col_D)) +
         legend.position = "none") +
   labs(y = "Normalized counts 3d", x = "Normalized counts N")
 ggsave("Plots/K27_Nvs3d.tiff", units = "in", width = 3, height = 3, dpi = 300, compression = 'lzw')
+
+
+# With annotations ----------------------------------------------------------------------------
+
+DataAnno <- lapply(Data, function(x){
+  left_join(x, Annotation, by = "Gene")
+})
+
+ggplot(DataAnno$K4, aes(x = N, y = h, color = Label, label = Label)) +
+  geom_hline(yintercept = 0, color = "darkgray") +
+  geom_vline(xintercept = 0, color = "darkgray") +
+  geom_point(size  = 0.5) +
+  ggrepel::geom_text_repel(fontface = "bold") +
+  xlim(0, 8000) +
+  ylim(0, 8000) +
+  theme_minimal() +
+  geom_segment(data = DataAnno$K4, aes(x = 0, xend = 8000, y = 0, yend = 8000),
+               color = "darkblue", linewidth = 0.5) +
+  theme(axis.text = element_text(colour = "black"),
+        legend.position = "none") +
+  labs(y = "Normalized counts 3h", x = "Normalized counts N")
+ggsave("Plots/K4_Nvs3h_TestAnno.tiff", units = "in", width = 3, height = 3, dpi = 300, compression = 'lzw')
+
+##Too difficult to read
 
 
 # Cross correlation ---------------------------------------------------------------------------
