@@ -40,19 +40,19 @@ GR_IDR <- lapply(AllIDR, ChangeNames)
 # Creating the master lists -----------------------------------------------
 
 K4_3hmaster <- GenomicRanges::union(GR_IDR$N.K4, GR_IDR$h.K4) 
-export.bed(K4_3hmaster, "Data/K4.N.3h.peaks.bed")
+#export.bed(K4_3hmaster, "Data/K4.N.3h.peaks.bed")
 
 K4_3dmaster <- GenomicRanges::union(GR_IDR$N.K4, GR_IDR$d.K4) 
-export.bed(K4_3dmaster, "Data/K4.N.3d.peaks.bed")
+#export.bed(K4_3dmaster, "Data/K4.N.3d.peaks.bed")
 
 AllK4 <- GenomicRanges::union(K4_3hmaster, K4_3dmaster)
-export.bed(AllK4, "Data/K4.N.3h.3d.peaks.bed")
+#export.bed(AllK4, "Data/K4.N.3h.3d.peaks.bed")
 
 K27_3hmaster <- GenomicRanges::union(GR_IDR$N.K27, GR_IDR$h.K27) 
-export.bed(K27_3hmaster, "Data/K27.N.3h.peaks.bed")
+#export.bed(K27_3hmaster, "Data/K27.N.3h.peaks.bed")
 
 K27_3dmaster <- GenomicRanges::union(GR_IDR$N.K27, GR_IDR$d.K27) 
-export.bed(K27_3dmaster, "Data/K27.N.3d.peaks.bed")
+#export.bed(K27_3dmaster, "Data/K27.N.3d.peaks.bed")
 
 AllK27 <- GenomicRanges::union(K27_3hmaster, K27_3dmaster)
-export.bed(AllK27, "Data/K27.N.3h.3d.peaks.bed")
+#export.bed(AllK27, "Data/K27.N.3h.3d.peaks.bed")
