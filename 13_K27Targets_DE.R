@@ -47,6 +47,9 @@ K27Genes <- read_excel("Data/K27genes_AnyCond_CDS.xlsx")
 
 RPKM <- read_excel("Data/RPKM_RNAseq.xlsx")
 
+RPKM_K27 <- read_excel("Data/RPKM_K27.xlsx")
+
+
 # Venn K27 Targets ----------------------------------------------------------------------------
 ##All timepoints
 LosingK27 <- full_join(DMGenes$K27_3h_Loss, DMGenes$K27_3d_Loss, 
@@ -173,3 +176,25 @@ ggplot(Plot, aes(x = Timepoint, y = log2(RPKM), color = Category, fill = Categor
 ggsave("Plots/K27_DE_RPKM.tiff", units = "in", width = 4, height = 4, dpi = 300, compression = 'lzw')
 
 compare_means(d ~ Category, data = RPKM_Cat)
+
+# RPKM K27 comparison -----------------------------------------------------------------------------
+RPKM_Cat <- plyr::ldply(All, .id = "Category") %>%
+  inner_join(RPKM_K27, by = "Gene") 
+
+Plot <- RPKM_Cat %>%
+  pivot_longer(cols = c("N", "h", "d"), names_to = "Timepoint", values_to = "RPKM") %>%
+  mutate(Timepoint = recode(Timepoint, h = "3h", d = "3d"),
+         Timepoint = as.factor(Timepoint),
+         Timepoint = forcats::fct_relevel(Timepoint, "N", "3h", "3d"))
+
+ggplot(Plot, aes(x = Timepoint, y = log2(RPKM), color = Category, fill = Category)) +
+  geom_boxplot(lwd = 0.6, alpha = 0.2) +
+  scale_color_manual(values = c("#945068", "goldenrod4","#365527")) +
+  scale_fill_manual(values = c("#D1AAB8", "#b8860b","#5a8e41")) +
+  labs(y = "H3K27me3 levels (log2(RPKM))", x = "") +
+  theme_minimal() +
+  theme(axis.text = element_text(colour = "black"),
+        legend.position = "none")
+ggsave("Plots/K27_K27_RPKM.tiff", units = "in", width = 4, height = 4, dpi = 300, compression = 'lzw')
+
+compare_means(N ~ Category, data = RPKM_Cat)

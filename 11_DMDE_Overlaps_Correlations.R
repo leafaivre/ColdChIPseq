@@ -90,8 +90,7 @@ grid.newpage()
 cowplot::plot_grid(h_U, h_D, d_U, d_D, 
           labels = c("Up 3h", "Down 3h", "Up 3d", "Down 3d"), 
           label_x = 0.5, hjust = 0.5)
-#ggsave("Plots/DEDM_Overlaps.tiff", units = "in", width = 10, height = 10, 
-       #dpi = 300, compression = 'lzw')
+ggsave("Plots/DEDM_Overlaps.tiff", units = "in", width = 6, height = 6, dpi = 300, compression = 'lzw')
 
 
 # Correlations all genes --------------------------------------------------------------------------------
@@ -206,3 +205,11 @@ cor.test(hCorr$DE_FC_3h, hCorr$K4_FC_3h, method = "spearman")
 cor.test(hCorr$DE_FC_3h, hCorr$K27_FC_3h, method = "spearman")
 cor.test(dCorr$DE_FC_3d, dCorr$K4_FC_3d, method = "spearman")
 cor.test(dCorr$DE_FC_3d, dCorr$K27_FC_3d, method = "spearman")
+
+
+# Cross-timepoints ----------------------------------------------------------------------------
+
+cor.test(hCorr$DE_FC_3h, hCorr$K4_FC_3d, method = "spearman")
+cor.test(hCorr$DE_FC_3h, hCorr$K27_FC_3d, method = "spearman")
+cor.test(dCorr$DE_FC_3d, dCorr$K4_FC_3h, method = "spearman")
+cor.test(dCorr$DE_FC_3d, dCorr$K27_FC_3h, method = "spearman")

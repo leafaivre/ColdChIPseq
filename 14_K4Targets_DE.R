@@ -47,6 +47,8 @@ K4Genes <- read_excel("Data/K4genes_AnyCond_CDS.xlsx")
 
 RPKM <- read_excel("Data/RPKM_RNAseq.xlsx")
 
+RPKM_K4 <- read_excel("Data/RPKM_K4.xlsx")
+
 # Venn K4 Targets ----------------------------------------------------------------------------
 ##All timepoints
 LosingK4 <- full_join(DMGenes$K4_3h_Loss, DMGenes$K4_3d_Loss, 
@@ -145,11 +147,11 @@ ggplot(Plot, aes(x = Timepoint, y = FC, color = Category, fill = Category)) +
   theme_minimal() +
   theme(axis.text = element_text(colour = "black"),
         legend.position = "none")
-ggsave("Plots/K4_DE_LogFC.tiff", units = "in", width = 3, height = 4, dpi = 300, compression = 'lzw')
+#ggsave("Plots/K4_DE_LogFC.tiff", units = "in", width = 3, height = 4, dpi = 300, compression = 'lzw')
 
 compare_means(DE_FC_3d ~ Category, data = FC_Cat)
 
-# RPKM comparison -----------------------------------------------------------------------------
+# RPKM DE comparison -----------------------------------------------------------------------------
 RPKM_Cat <- plyr::ldply(All, .id = "Category") %>%
   inner_join(RPKM, by = "Gene") 
 
@@ -167,6 +169,29 @@ ggplot(Plot, aes(x = Timepoint, y = log2(RPKM), color = Category, fill = Categor
   theme_minimal() +
   theme(axis.text = element_text(colour = "black"),
         legend.position = "none")
-ggsave("Plots/K4_DE_RPKM.tiff", units = "in", width = 4, height = 4, dpi = 300, compression = 'lzw')
+ggsave("Plots/K4_DE_RPKM.tiff", units = "in", width = 5, height = 4, dpi = 300, compression = 'lzw')
 
 compare_means(d ~ Category, data = RPKM_Cat)
+
+
+# RPKM K4 comparison -----------------------------------------------------------------------------
+RPKM_Cat <- plyr::ldply(All, .id = "Category") %>%
+  inner_join(RPKM_K4, by = "Gene") 
+
+Plot <- RPKM_Cat %>%
+  pivot_longer(cols = c("N", "h", "d"), names_to = "Timepoint", values_to = "RPKM") %>%
+  mutate(Timepoint = recode(Timepoint, h = "3h", d = "3d"),
+         Timepoint = as.factor(Timepoint),
+         Timepoint = forcats::fct_relevel(Timepoint, "N", "3h", "3d"))
+
+ggplot(Plot, aes(x = Timepoint, y = log2(RPKM), color = Category, fill = Category)) +
+  geom_boxplot(lwd = 0.6, alpha = 0.2) +
+  scale_color_manual(values = c("#776667", "goldenrod4","#007668")) +
+  scale_fill_manual(values = c("#BEB3B4", "#b8860b","#13ffe3")) +
+  labs(y = "H3K4me3 levels (log2(RPKM))", x = "") +
+  theme_minimal() +
+  theme(axis.text = element_text(colour = "black"),
+        legend.position = "none")
+ggsave("Plots/K4_K4_RPKM.tiff", units = "in", width = 4, height = 4, dpi = 300, compression = 'lzw')
+
+compare_means(N ~ Category, data = RPKM_Cat)
